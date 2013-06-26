@@ -9,17 +9,18 @@ $_SESSION['validador']='login';
 <html>
 <header>
 	<title>Gestion de fichas: login</title>
+	<link rel="stylesheet" href="css/login.css">
 </header>
 <body>
 	<section class="loginform cf">  
 	<form name="login" action="validarusuario.php" method="get" accept-charset="utf-8">  
     <table>  
         <tr>
-			<td><label for="username">Usuario</label></td>
-			<td><input type="email" name="username" placeholder="password" required></td>
+			<td><label for="username">Usuario:</label></td>
+			<td><input type="text" name="username" placeholder="text" required></td>
 		</tr> 
         <tr>
-			<td><label for="password">Password</label></td>
+			<td><label for="password">Contrase&ntilde;a:</label></td>
 			<td><input type="password" name="password" placeholder="password" required></td>
 		</tr>
     </table>
