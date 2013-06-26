@@ -12,7 +12,7 @@ $_SESSION['validador']='login';
 </header>
 <body>
 	<section class="loginform cf">  
-	<form name="login" action="index_submit" method="get" accept-charset="utf-8">  
+	<form name="login" action="validarusuario.php" method="get" accept-charset="utf-8">  
     <table>  
         <tr>
 			<td><label for="username">Usuario</label></td>
