@@ -1,7 +1,7 @@
 <?php
 	//Funcion para conectarse a la base de datos
 	function conectarse(){	
-	if(!($conexion=mysql_connect('localhost:85', 'root', '')))//servidor, usuario y contraseña
+	if(!($conexion=mysql_connect('localhost', 'root', '')))//servidor, usuario y contraseña
 	{
 		echo "Error conectando a la base de datos.";
 		exit();
@@ -14,4 +14,5 @@
 	//Retorna el valor de la conexion.
 	return $conexion;
 }
+conectarse();
 ?>

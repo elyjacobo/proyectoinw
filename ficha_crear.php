@@ -5,6 +5,10 @@
 	<title>Gestion de fichas: crear ficha alumno</title>
 </head>
 <body>
+<?php
+	require_once("conexion.php");
+	$conexion1 = conectarse();
+?>
 <form action="ficha_guardar.php" method="post" enctype="multipart/form-data" name="form1" id="form1">
     <table width="588" height="52" border="1">
       <tr>
@@ -63,8 +67,6 @@
         <td><label for="select">Carrera</label></td>
         <td><select name="carrera" id="select">	
 			<?php
-				$conexion1 = mysql_connect("localhost","root",'');
-				mysql_select_db("ficha",$conexion1);
 				$query = "SELECT * FROM  carreras";
 			    $carreras = mysql_query($query ,$conexion1);
 			    While($row=mysql_fetch_array($carreras)){
@@ -93,9 +95,8 @@
 	  <tr>
         <td><label for="label10">Tutor: </label></td>
         <td><select name="tutor" id="tutor">	
+			
 			<?php
-				$conexion1 = mysql_connect("localhost","root",'');
-				mysql_select_db("ficha",$conexion1);
 				$query = "SELECT * FROM  docentes";
 			    $docentes = mysql_query($query ,$conexion1);
 			    While($row=mysql_fetch_array($docentes)){
