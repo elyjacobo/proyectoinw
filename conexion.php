@@ -14,5 +14,4 @@
 	//Retorna el valor de la conexion.
 	return $conexion;
 }
-conectarse();
 ?>

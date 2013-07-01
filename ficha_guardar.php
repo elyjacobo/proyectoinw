@@ -5,7 +5,9 @@
 <body>
 
 <?php
-if(isset($_POST['carnet']) && $_POST['carnet'] != "" 
+
+	require_once("/class/estudiante.php");
+	if(isset($_POST['carnet']) && $_POST['carnet'] != "" 
 	&& isset($_POST['nombre']) && $_POST['nombre'] != "" 
 	&& isset($_POST['apellidos']) && $_POST['apellidos'] != "" 
 	&& isset($_POST['responsable']) && $_POST['responsable'] != "" 
@@ -18,7 +20,6 @@ if(isset($_POST['carnet']) && $_POST['carnet'] != ""
 	&& isset($_POST['retiradas']) && $_POST['retiradas'] != ""
 	&& isset($_POST['retiradas']) && $_POST['retiradas'] != ""){
 
-	require('estudiante.php');
 	$archivo_name = $_FILES['foto']['tmp_name'];
 	$foto = $_FILES['foto']['name']; 
 	$carnet = $_POST['carnet'];
@@ -37,11 +38,6 @@ if(isset($_POST['carnet']) && $_POST['carnet'] != ""
 	$reprobadas = $_POST['reprobadas'];
 	$retiradas = $_POST['retiradas'];
 	$tutor = $_POST['tutor'];
-    
-	echo '<b>Carnet: ';
-	echo $carnet . '<br>';
-     
-	if($_POST['action']=='upload'){   
         
 	echo '<b>Carnet: ';
 	echo $carnet . '<br>';
@@ -53,6 +49,8 @@ if(isset($_POST['carnet']) && $_POST['carnet'] != ""
 	echo $encargado . '<br>';
 	echo '<b>Direccion: </b>';
 	echo $direccion . '<br>';
+	echo '<b>Email: </b>';
+	echo $email . '<br>';
 	echo '<b>Telefono de trabajo: </b>';
 	echo $telefono_trabajo . '<br>';
 	echo '<b>Telefono de casa: </b>';
@@ -77,20 +75,20 @@ if(isset($_POST['carnet']) && $_POST['carnet'] != ""
 
 	echo '<b>Materias retiradas: </b>';
 	echo $retiradas . '<br>';
+	
+	echo '<b>Tutor: </b>';
+	echo $tutor . '<br>';
 
-	$nuevaficha = new estudiante($carnet,$nombres,$apellidos,$encargado,$direccion,$telefono_trabajo,$telefono_casa,$cel,$sexo,$email,$foto,$carrera,$cum,$aprobadas,$reprobadas,$retiradas);
+	$nuevaficha = new estudiante($carnet,$nombres,$apellidos,$encargado,$direccion,$telefono_trabajo,$telefono_casa,$cel,$sexo,$email,$foto,$carrera,$cum,$aprobadas,$reprobadas,$retiradas,$tutor);
 		$nuevaficha->agregar_estudiante();
 		$nuevaficha->subir_foto($foto,$archivo_name); 		
-	}
-	}
-
-	else{	
+	}else{	
 	?>
+	
 	
 	<script>
 		alert("No se han llenado algunos campos");
 		window.history.back();
-		//document.location=('./ficha_crear.php');
 	</script>
 	
 	<?php } ?>
