@@ -35,7 +35,7 @@ if(in_array($q,$array)){
 		echo '<tr><td width="200"> Nombres: </td><td width="200">' . $rows['NOMBRE'] . '</td></tr>';
 		echo '<tr><td width="200"> Apellidos: </td><td width="200">' . $rows['APELLIDO'] . '</td></tr>';
 		echo '<tr><td width="200"> Direcci&oacute;n: </td><td width="200">' . $rows['DIRECCION'] . '</td></tr>';
-		echo '<tr><td width="200"> Tele&eacute;lefono de trabajo: </td><td width="200">' . $rows['TEL_TRABAJO'] . '</td></tr>';
+		echo '<tr><td width="200"> Tel&eacute;lefono de trabajo: </td><td width="200">' . $rows['TEL_TRABAJO'] . '</td></tr>';
 		echo '<tr><td width="200"> Tel&eacute;fono de casa: </td><td width="200">' . $rows['TEL_CASA'] . '</td></tr>';
 		echo '<tr><td width="200"> Celular:</td><td width="200"> ' . $rows['CELULAR'] . '</td></tr>';
 		if($rows['SEXO']=='F'||$rows['SEXO']=='f')
@@ -44,14 +44,16 @@ if(in_array($q,$array)){
 			echo '<tr><td width="200"> Sexo: </td><td width="200">Masculino</td></tr>';
 		else
 			echo '<tr><td width="200"> Sexo: </td><td width="200">' . $rows['SEXO'] . '</td></tr>';
-		echo '<tr><td width="200"> Emial: </td><td width="200">' . $rows['EMAIL'] . '</td></tr>';
+		echo '<tr><td width="200"> Email: </td><td width="200">' . $rows['EMAIL'] . '</td></tr>';
        
     }
-	echo '<tr><td bgcolor="darkblue" colspan="2"><B><font color=white>Datos academicos</font></B></td></tr>';
+	echo '<tr><td bgcolor="darkblue" colspan="2"><B><font color=white>Datos acad&eacute;micos</font></B></td></tr>';
 	$expediente=mysql_query($query1,$cn);
 	while($rowsexp=mysql_fetch_array($expediente)){
-        echo '<tr><td width="200"> ID EXPEDIENTE: ' . '</td><td width="200">'. $rowsexp['ID_EXPEDIENTE'] . '</td></tr>';
-        echo '<tr><td width="200"> CARRERA: ' . '</td><td width="200">'. $rowsexp['ID_CARRERA'] . '</td></tr>';
+        $cn_aux = conectarse();
+		$carrera=mysql_query("SELECT * FROM carreras WHERE ID_CARRERA=". $rowsexp['ID_CARRERA'],$cn);
+		$row1=mysql_fetch_array($carrera);
+		echo '<tr><td width="200"> CARRERA: ' . '</td><td width="200">'. $row1['CARRERA'] . '</td></tr>';
         echo '<tr><td width="200"> CUM: ' . '</td><td width="200">'. $rowsexp['CUM'] . '</td></tr>';
         echo '<tr><td width="200"> MATERIAS APROBADAS: ' . '</td><td width="200">'. $rowsexp['ASIG_APROBADAS'] . '</td></tr>';
         echo '<tr><td width="200"> MATERIAS REPROBADAS: ' . '</td><td width="200">'. $rowsexp['ASIG_REPROBADAS'] . '</td></tr>';
@@ -65,8 +67,7 @@ else if(trim($q)=='') {
 else{
     
     echo '<tr><td colspan="2"><B><font color=red>Ficha inexistente</font></B></td></tr>';
-}
-   
+}  
         
     }    
     
@@ -74,7 +75,7 @@ else{
     
     public function Devolver_ficha($carnet){
        
-       $con=$this->conectarse();
+       $con=conectarse();
        $query="SELECT * FROM estudiante WHERE CARNET='" . $carnet . "'";
        $query2 = "SELECT * FROM expediente WHERE CARNET='" . $carnet . "'";
        
@@ -415,9 +416,9 @@ echo "</tr>";
     }
 
   public function eliminar_ficha($carnet){
-    $con=$this->conectarse();
-    $query = "DELETE FROM estudiante WHERE CARNET='" . $carnet . "'";
-    $query1="DELETE FROM expediente WHERE CARNET='" . $carnet . "'";
+    $con=conectarse();
+    $query = "DELETE FROM estudiante WHERE ID_ESTUDIANTE='" . $carnet . "'";
+    $query1="DELETE FROM expediente WHERE ID_ESTUDIANTE='" . $carnet . "'";
     mysql_query($query1,$con);
     $nr=mysql_affected_rows();
     if($nr>0){
@@ -425,10 +426,10 @@ echo "</tr>";
         mysql_query($query,$con);
         $nr1 = mysql_affected_rows();
         if($nr1>0){
-           echo '<br><b>LA FICHA ESTUDIANTIL MOSTRADA HA SIDO ELIMINADA'; 
+           echo '<br><b>La ficha estudiantil ha sido eliminada'; 
         }
         else{
-            echo '<br><b>LA FICHA MOSTRADA NO SE HA PODIDO BORRAR';
+            echo '<br><b>La ficha no se ha podido borrar';
         }
         
         
