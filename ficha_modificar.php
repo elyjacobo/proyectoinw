@@ -42,6 +42,7 @@ xmlhttp.send();
 	require_once("conexion.php");
 	$conexion1 = conectarse();
 ?>
+<form action="modificar.php" method="post" enctype="multipart/form-data">
 <div id="busqueda">
 Buscar ficha estudiantil<br>
 <table>
@@ -57,8 +58,9 @@ Buscar ficha estudiantil<br>
         </select></td>
       </tr>
 	  <tr>
-		<td colspan=2></td>
-	  </tr>
+	  <td><label for="Submit"></label>
+            <input type="submit" name="Submit" value="Seleccionar ficha" id="Submit" /></td>
+      </tr>
 </div>
 
 <div id="resultados"> 

@@ -76,8 +76,8 @@ else{
     public function Devolver_ficha($carnet){
        
        $con=conectarse();
-       $query="SELECT * FROM estudiante WHERE CARNET='" . $carnet . "'";
-       $query2 = "SELECT * FROM expediente WHERE CARNET='" . $carnet . "'";
+       $query="SELECT * FROM estudiante WHERE ID_ESTUDIANTE='" . $carnet . "'";
+       $query2 = "SELECT * FROM expediente WHERE ID_ESTUDIANTE='" . $carnet . "'";
        
        $result=mysql_query($query,$con);
        $result1=mysql_query($query2,$con);
@@ -91,28 +91,28 @@ echo "<td>";
 echo "CARNET: ";
 echo "</td>";
 echo "<td>";
-echo $row['CARNET'];
-echo "<input type='hidden' name='carnet' size='8' maxlenght='8' value='".$row['CARNET']."'>";
+echo $row['ID_ESTUDIANTE'];
+echo "<input type='hidden' name='carnet' size='8' maxlenght='8' value='".$row['ID_ESTUDIANTE']."'>";
 echo "</td>";
 echo "</tr>";
     
     
      echo "<tr>";
      echo "<td>";
-     echo "NOMBRE: ";
+     echo "Nombre: ";
      echo "</td>";
      echo "<td>";
-    echo "<input type='text' name='nombres' size='30' maxlenght='30' value='".$row['NOMBRES']."'>";
+    echo "<input type='text' name='nombres' size='30' maxlenght='30' value='".$row['NOMBRE']."'>";
      echo "</td>";
      echo "</tr>";
        
         
     echo "<tr>";
     echo "<td>";
-    echo "APELLIDOS: ";
+    echo "Apellidos: ";
     echo "</td>";
     echo "<td>";
-    echo "<input type='text' name='apellidos' size='30' maxlenght='30' value='".$row['APELLIDOS']."'>";
+    echo "<input type='text' name='apellidos' size='30' maxlenght='30' value='".$row['APELLIDO']."'>";
     echo "</td>";
     echo "</tr>";  
     
@@ -121,13 +121,13 @@ echo "</tr>";
     echo "ENCARGADO: ";
     echo "</td>";
     echo "<td>";
-    echo "<input type='text' name='encargado' size='30' maxlenght='30' value='".$row['ID_ENCARGADO']."'>";
+    echo "<input type='text' name='encargado' size='30' maxlenght='30' value='".$row['RESPONSABLE']."'>";
     echo "</td>";
     echo "</tr>"; 
     
-     echo "<tr>";
+    echo "<tr>";
     echo "<td>";
-    echo "DIRECCION: ";
+    echo "Direcci&oacute;n: ";
     echo "</td>";
     echo "<td>";
     echo "<input type='text' name='direccion' size='30' maxlenght='30' value='".$row['DIRECCION']."'>";
@@ -136,25 +136,25 @@ echo "</tr>";
     echo "<tr>";
     echo "<td>";
     
-    echo "TELEFONO DE TRABAJO: ";
+    echo "Tel&eacute;fono de trabajo: ";
     echo "</td>";
     echo "<td>";
-    echo "<input type='text' name='teltrab' size='30' maxlenght='30' value='".$row['TELEFONO_TRABAJO']."'>";
+    echo "<input type='text' name='teltrab' size='30' maxlenght='30' value='".$row['TEL_TRABAJO']."'>";
     echo "</td>";
     echo "</tr>"; 
     
      echo "<tr>";
     echo "<td>";
-    echo "TELEFONO DE CASA: ";
+    echo "Tel&eacute;fono de casa: ";
     echo "</td>";
     echo "<td>";
-    echo "<input type='text' name='telca' size='30' maxlenght='30' value='".$row['TELEFONO_CASA']."'>";
+    echo "<input type='text' name='telca' size='30' maxlenght='30' value='".$row['TEL_CASA']."'>";
     echo "</td>";
     echo "</tr>";
       
     echo "<tr>";
     echo "<td>";
-    echo "CELULAR: ";
+    echo "Celular: ";
     echo "</td>";
     echo "<td>";
     echo "<input type='text' name='celular' size='30' maxlenght='30' value='".$row['CELULAR']."'>";
@@ -163,7 +163,7 @@ echo "</tr>";
     
     echo "<tr>";
     echo "<td>";
-    echo "SEXO: ";
+    echo "Sexo: ";
     echo "</td>";
     echo "<td>";
     echo "<input type='text' name='sexo' size='30' maxlenght='30' value='".$row['SEXO']."'>";
@@ -172,25 +172,14 @@ echo "</tr>";
     
     echo "<tr>";
     echo "<td>";
-    echo "EMAIL: ";
+    echo "Email: ";
     echo "</td>";
     echo "<td>";
     echo "<input type='text' name='email' size='30' maxlenght='30' value='".$row['EMAIL']."'>";
     echo "</td>";
     echo "</tr>";  
     
-    echo "<tr>";
-    echo "<td>";
-    echo "CARRERA: ";
-    echo "<td><select name='carrera' id='select'>";
-    echo "<option value='" . $rowexp['CARRERA'] . "'selected='selected'>" . $rowexp['CARRERA'] . "</option>";
-    echo "<option value='Ing. Telecomunicaciones'>Ing. Telecomunicaciones</option>";
-    echo "<option value='Ing. Biomedica'>Ing. Biomedica</option>";
-    echo "<option value='Ing. Ciencias de la computacion'>Ing. Ciencias de la computacion</option>";
-      echo "</select></td>";
     
-      
-    echo "<tr>";
     echo "<td>";
     echo "CUM: ";
     echo "</td>";
@@ -201,28 +190,28 @@ echo "</tr>";
     
     echo "<tr>";
     echo "<td>";
-    echo "MATERIAS APROBADAS: ";
+    echo "Materias aprobadas: ";
     echo "</td>";
     echo "<td>";
-    echo "<input type='text' name='aprobadas' size='30' maxlenght='30' value='".$rowexp['MATERIAS_APROBADAS']."'>";
+    echo "<input type='text' name='aprobadas' size='30' maxlenght='30' value='".$rowexp['ASIG_APROBADAS']."'>";
     echo "</td>";
     echo "</tr>";  
     
     echo "<tr>";
     echo "<td>";
-    echo "MATERIAS REPROBADAS: ";
+    echo "Materias reprobadas: ";
     echo "</td>";
     echo "<td>";
-    echo "<input type='text' name='reprobadas' size='30' maxlenght='30' value='".$rowexp['MATERIAS_REPROBADAS']."'>";
+    echo "<input type='text' name='reprobadas' size='30' maxlenght='30' value='".$rowexp['ASIG_REPROBADAS']."'>";
     echo "</td>";
     echo "</tr>";
     
      echo "<tr>";
     echo "<td>";
-    echo "MATERIAS RETIRADAS: ";
+    echo "Materias Retiradas: ";
     echo "</td>";
     echo "<td>";
-    echo "<input type='text' name='retiradas' size='30' maxlenght='30' value='".$rowexp['MATERIAS_RETIRADAS']."'>";
+    echo "<input type='text' name='retiradas' size='30' maxlenght='30' value='".$rowexp['ASIG_RETIRADAS']."'>";
     echo "</td>";
     echo "</tr>";   
     
@@ -231,189 +220,18 @@ echo "</tr>";
     }
     
     
-  public function actualizar_ficha($carnet,$nombre,$apellidos,$encargadp,$direccion,$teltrab,$telca,$cel,$sexo,$email,$carrera,$cum,$mat_aprob,$mat_reprob,$mat_ret){    
-    $con=$this->conectarse();
-    $cadenaset="NOMBRES='".$nombre."', APELLIDOS='".$apellidos."', ID_ENCARGADO='".$encargadp."',DIRECCION='".$direccion."', TELEFONO_TRABAJO='".$teltrab."', TELEFONO_CASA='".$telca."', CELULAR='".$cel."',SEXO='".$sexo."',EMAIL='".$email."'";
-    $cadenaset1 = "CARRERA='".$carrera."', CUM='".$cum."',MATERIAS_APROBADAS='".$mat_aprob."',MATERIAS_REPROBADAS='".$mat_reprob."',MATERIAS_RETIRADAS='".$mat_ret."'";
-    $query = "UPDATE estudiante SET $cadenaset WHERE CARNET = '$carnet'";
-    $query1 = "UPDATE expediente SET $cadenaset1 WHERE CARNET ='$carnet '";
-    mysql_query($query1,$con);
-    $nr=mysql_affected_rows();
-    if($nr>0){
-        mysql_query($query,$con);
-        $nr1 = mysql_affected_rows();
-        if($nr1>0){
-        echo '<br><b>LOS DATOS SE ACTUALIZARON CORRECTAMENTE';
-        }
-        else{
-        echo '<br><b>NO SE ACTUALIZO EL CONTACTO';
-        }
-    }
-    
-    
-    
-    
+  public function actualizar_ficha($carnet,$nombre,$apellidos,$encargadp,$direccion,$teltrab,$telca,$cel,$sexo,$email,$cum,$mat_aprob,$mat_reprob,$mat_ret){    
+    $con=conectarse();
+	$con1=conectarse();
+    $cadenaset="NOMBRE='".$nombre."', APELLIDO='".$apellidos."', RESPONSABLE='".$encargadp."',DIRECCION='".$direccion."', TEL_TRABAJO='".$teltrab."', TEL_CASA='".$telca."', CELULAR='".$cel."',SEXO='".$sexo."',EMAIL='".$email."'";
+    $cadenaset1="CUM=".$cum.", ASIG_APROBADAS=".$mat_aprob.", ASIG_REPROBADAS=".$mat_reprob.", ASIG_RETIRADAS=".$mat_ret;
+    $query = "UPDATE estudiante SET $cadenaset WHERE ID_ESTUDIANTE = '$carnet'";
+    $query1 = "UPDATE expediente SET $cadenaset1 WHERE ID_ESTUDIANTE ='$carnet '";
+    mysql_query($query1,$con1);
+	mysql_query($query,$con);   
 }
 
 
-   public function Devolver_ficha_eliminar($carnet){
-       
-       $con=$this->conectarse();
-       $query="SELECT * FROM estudiante WHERE CARNET='" . $carnet . "'";
-       $query2 = "SELECT * FROM expediente WHERE CARNET='" . $carnet . "'";
-       
-       $result=mysql_query($query,$con);
-       $result1=mysql_query($query2,$con);
-       $rowexp = mysql_fetch_array($result1);
-      $row=mysql_fetch_array($result);
-      echo "<form action='eliminar1.php' method='post' enctype='multipart/form-data'>";
-     echo "<table border='0'>";
-    
-    echo "<tr>";
-echo "<td>";
-echo "CARNET: ";
-echo "</td>";
-echo "<td>";
-echo $row['CARNET'];
-echo "<input type='hidden' name='carnet' size='8' maxlenght='8' value='".$row['CARNET']."'>";
-echo "</td>";
-echo "</tr>";
-    
-    
-     echo "<tr>";
-     echo "<td>";
-     echo "NOMBRE: ";
-     echo "</td>";
-     echo "<td>";
-    echo "<input type='text' name='nombres' size='30' maxlenght='30' value='".$row['NOMBRES']."'>";
-     echo "</td>";
-     echo "</tr>";
-       
-        
-    echo "<tr>";
-    echo "<td>";
-    echo "APELLIDOS: ";
-    echo "</td>";
-    echo "<td>";
-    echo "<input type='text' name='apellidos' size='30' maxlenght='30' value='".$row['APELLIDOS']."'>";
-    echo "</td>";
-    echo "</tr>";  
-    
-    echo "<tr>";
-    echo "<td>";
-    echo "ENCARGADO: ";
-    echo "</td>";
-    echo "<td>";
-    echo "<input type='text' name='encargado' size='30' maxlenght='30' value='".$row['ID_ENCARGADO']."'>";
-    echo "</td>";
-    echo "</tr>"; 
-    
-     echo "<tr>";
-    echo "<td>";
-    echo "DIRECCION: ";
-    echo "</td>";
-    echo "<td>";
-    echo "<input type='text' name='direccion' size='30' maxlenght='30' value='".$row['DIRECCION']."'>";
-    echo "</td>";
-    echo "</tr>";  
-    echo "<tr>";
-    echo "<td>";
-    
-    echo "TELEFONO DE TRABAJO: ";
-    echo "</td>";
-    echo "<td>";
-    echo "<input type='text' name='teltrab' size='30' maxlenght='30' value='".$row['TELEFONO_TRABAJO']."'>";
-    echo "</td>";
-    echo "</tr>"; 
-    
-     echo "<tr>";
-    echo "<td>";
-    echo "TELEFONO DE CASA: ";
-    echo "</td>";
-    echo "<td>";
-    echo "<input type='text' name='telca' size='30' maxlenght='30' value='".$row['TELEFONO_CASA']."'>";
-    echo "</td>";
-    echo "</tr>";
-      
-    echo "<tr>";
-    echo "<td>";
-    echo "CELULAR: ";
-    echo "</td>";
-    echo "<td>";
-    echo "<input type='text' name='celular' size='30' maxlenght='30' value='".$row['CELULAR']."'>";
-    echo "</td>";
-    echo "</tr>";  
-    
-    echo "<tr>";
-    echo "<td>";
-    echo "SEXO: ";
-    echo "</td>";
-    echo "<td>";
-    echo "<input type='text' name='sexo' size='30' maxlenght='30' value='".$row['SEXO']."'>";
-    echo "</td>";
-    echo "</tr>";  
-    
-    echo "<tr>";
-    echo "<td>";
-    echo "EMAIL: ";
-    echo "</td>";
-    echo "<td>";
-    echo "<input type='text' name='email' size='30' maxlenght='30' value='".$row['EMAIL']."'>";
-    echo "</td>";
-    echo "</tr>";  
-    
-    echo "<tr>";
-    echo "<td>";
-    echo "CARRERA: ";
-    echo "<td><select name='carrera' id='select'>";
-    echo "<option value='" . $rowexp['CARRERA'] . "'selected='selected'>" . $rowexp['CARRERA'] . "</option>";
-    echo "<option value='Ing. Telecomunicaciones'>Ing. Telecomunicaciones</option>";
-    echo "<option value='Ing. Biomedica'>Ing. Biomedica</option>";
-    echo "<option value='Ing. Ciencias de la computacion'>Ing. Ciencias de la computacion</option>";
-      echo "</select></td>";
-    
-      
-    echo "<tr>";
-    echo "<td>";
-    echo "CUM: ";
-    echo "</td>";
-    echo "<td>";
-    echo "<input type='text' name='cum' size='30' maxlenght='30' value='".$rowexp['CUM']."'>";
-    echo "</td>";
-    echo "</tr>";  
-    
-    echo "<tr>";
-    echo "<td>";
-    echo "MATERIAS APROBADAS: ";
-    echo "</td>";
-    echo "<td>";
-    echo "<input type='text' name='aprobadas' size='30' maxlenght='30' value='".$rowexp['MATERIAS_APROBADAS']."'>";
-    echo "</td>";
-    echo "</tr>";  
-    
-    echo "<tr>";
-    echo "<td>";
-    echo "MATERIAS REPROBADAS: ";
-    echo "</td>";
-    echo "<td>";
-    echo "<input type='text' name='reprobadas' size='30' maxlenght='30' value='".$rowexp['MATERIAS_REPROBADAS']."'>";
-    echo "</td>";
-    echo "</tr>";
-    
-     echo "<tr>";
-    echo "<td>";
-    echo "MATERIAS RETIRADAS: ";
-    echo "</td>";
-    echo "<td>";
-    echo "<input type='text' name='retiradas' size='30' maxlenght='30' value='".$rowexp['MATERIAS_RETIRADAS']."'>";
-    echo "</td>";
-    echo "</tr>";   
-    
-    echo "<tr><td colspan=2 align=center>";
-        echo "<input type='submit' value='Eliminar ficha'></td></tr>";
-        
-    
-    }
 
   public function eliminar_ficha($carnet){
     $con=conectarse();
