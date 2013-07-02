@@ -1,33 +1,18 @@
 <?php
 
+require_once("conexion.php");
+
 class ficha{
 
+
     
-    function conectarse()
-{
-$servidor="localhost";
-$usuario="root";
-if(!($conexion=mysql_connect($servidor,$usuario,'')))
-{
-echo "Error conectando a la base de datos.";
-exit();
-}
-if(!mysql_select_db("ficha",$conexion))
-{
-echo "Error Conexion con la Base de Datos.";
-exit();
-}
-return $conexion;
-}
-    
-    
+   
 public function mostrar_ficha($q){
-   $ruta=getcwd();    
+$ruta=getcwd();    
 $array=array();
-include('conexion.php');
-$cn = $this->conectarse();
-$query = "SELECT * FROM estudiante WHERE CARNET='" . $q . "'";
-$query1 = "SELECT * FROM expediente WHERE CARNET='" . $q . "'";
+$cn = conectarse();
+$query = "SELECT * FROM estudiante WHERE ID_ESTUDIANTE='" . $q . "'";
+$query1 = "SELECT * FROM expediente WHERE ID_ESTUDIANTE='" . $q . "'";
 $estudiante = mysql_query($query,$cn);
 $i=0;
 while($rows = mysql_fetch_array($estudiante)){
@@ -41,46 +26,45 @@ while($rows = mysql_fetch_array($estudiante)){
 if(in_array($q,$array)){
     
    $estudiante = mysql_query($query,$cn);
-   while($rows = mysql_fetch_array($estudiante)){
+   while($rows = mysql_fetch_array($estudiante)){    
     
-    
-   echo '<tr><td bgcolor="darkblue" colspan="2"><B><font  color=white>INFORMACION DEL ESTUDIANTE</font></B></td></tr>';
-  echo '<tr><td bgcolor="darkblue" colspan="2"><B><font color=white>Datos personales</font></B></td></tr>';
- // print ("<tr><td> <a target='_blank' href= '" . $rows['fotografia'] . "'><img src='iconos/ico-fichero.gif'></a></td></tr>");
-    print ("<tr><td width=200 colspan=2 align=center><img width=125 heigth=125 src='". $rows['fotografia'] . "'></img></td></tr>");
-   echo '<tr><td width="200"> CARNET: ' . '</td><td width="200">'. $rows['CARNET'] . '</td></tr>';
-   echo '<tr><td width="200"> ENCARGADO: </td><td width="200">' . $rows['ID_ENCARGADO'] . '</td></tr>';
-    echo '<tr><td width="200"> NOMBRES: </td><td width="200">' . $rows['NOMBRES'] . '</td></tr>';
-    echo '<tr><td width="200"> APELLIDOS: </td><td width="200">' . $rows['APELLIDOS'] . '</td></tr>';
-     echo '<tr><td width="200"> DIRECCION: </td><td width="200">' . $rows['DIRECCION'] . '</td></tr>';
-      echo '<tr><td width="200"> TELEFONO DE TRABAJO: </td><td width="200">' . $rows['TELEFONO_TRABAJO'] . '</td></tr>';
-      echo '<tr><td width="200"> TELEFONO DE CASA: </td><td width="200">' . $rows['TELEFONO_CASA'] . '</td></tr>';
-       echo '<tr><td width="200"> CELULAR:</td><td width="200"> ' . $rows['CELULAR'] . '</td></tr>';
-        echo '<tr><td width="200"> SEXO: </td><td width="200">' . $rows['SEXO'] . '</td></tr>';
-       echo '<tr><td width="200"> EMAIL: </td><td width="200">' . $rows['EMAIL'] . '</td></tr>';
+		echo '<tr><td bgcolor="darkblue" colspan="2"><B><font color=white>Datos personales</font></B></td></tr>';
+		echo '<tr><td width=200 colspan=2 align=center><img width=125 heigth=125 src="'. $rows['FOTO'] . '"></img></td></tr>';
+		echo '<tr><td width="200"> Carnet: ' . '</td><td width="200">'. $rows['ID_ESTUDIANTE'] . '</td></tr>';
+		echo '<tr><td width="200"> Encargado: </td><td width="200">' . $rows['RESPONSABLE'] . '</td></tr>';
+		echo '<tr><td width="200"> Nombres: </td><td width="200">' . $rows['NOMBRE'] . '</td></tr>';
+		echo '<tr><td width="200"> Apellidos: </td><td width="200">' . $rows['APELLIDO'] . '</td></tr>';
+		echo '<tr><td width="200"> Direcci&oacute;n: </td><td width="200">' . $rows['DIRECCION'] . '</td></tr>';
+		echo '<tr><td width="200"> Tele&eacute;lefono de trabajo: </td><td width="200">' . $rows['TEL_TRABAJO'] . '</td></tr>';
+		echo '<tr><td width="200"> Tel&eacute;fono de casa: </td><td width="200">' . $rows['TEL_CASA'] . '</td></tr>';
+		echo '<tr><td width="200"> Celular:</td><td width="200"> ' . $rows['CELULAR'] . '</td></tr>';
+		if($rows['SEXO']=='F'||$rows['SEXO']=='f')
+			echo '<tr><td width="200"> Sexo: </td><td width="200">Femenino</td></tr>';
+		else if($rows['SEXO']=='M'||$rows['SEXO']=='m')
+			echo '<tr><td width="200"> Sexo: </td><td width="200">Masculino</td></tr>';
+		else
+			echo '<tr><td width="200"> Sexo: </td><td width="200">' . $rows['SEXO'] . '</td></tr>';
+		echo '<tr><td width="200"> Emial: </td><td width="200">' . $rows['EMAIL'] . '</td></tr>';
        
-       }
-       echo '<tr><td bgcolor="darkblue" colspan="2"><B><font color=white>Datos academicos</font></B></td></tr>';
-       $expediente=mysql_query($query1,$cn);
-       while($rowsexp=mysql_fetch_array($expediente)){
+    }
+	echo '<tr><td bgcolor="darkblue" colspan="2"><B><font color=white>Datos academicos</font></B></td></tr>';
+	$expediente=mysql_query($query1,$cn);
+	while($rowsexp=mysql_fetch_array($expediente)){
         echo '<tr><td width="200"> ID EXPEDIENTE: ' . '</td><td width="200">'. $rowsexp['ID_EXPEDIENTE'] . '</td></tr>';
-        echo '<tr><td width="200"> CARRERA: ' . '</td><td width="200">'. $rowsexp['CARRERA'] . '</td></tr>';
+        echo '<tr><td width="200"> CARRERA: ' . '</td><td width="200">'. $rowsexp['ID_CARRERA'] . '</td></tr>';
         echo '<tr><td width="200"> CUM: ' . '</td><td width="200">'. $rowsexp['CUM'] . '</td></tr>';
-        echo '<tr><td width="200"> MATERIAS APROBADAS: ' . '</td><td width="200">'. $rowsexp['MATERIAS_APROBADAS'] . '</td></tr>';
-        echo '<tr><td width="200"> MATERIAS REPROBADAS: ' . '</td><td width="200">'. $rowsexp['MATERIAS_REPROBADAS'] . '</td></tr>';
-        echo '<tr><td width="200"> MATERIAS RETIRADAS: ' . '</td><td width="200"> '. $rowsexp['MATERIAS_RETIRADAS'] . '</td></tr>';
-       
-       }
-      
-    
+        echo '<tr><td width="200"> MATERIAS APROBADAS: ' . '</td><td width="200">'. $rowsexp['ASIG_APROBADAS'] . '</td></tr>';
+        echo '<tr><td width="200"> MATERIAS REPROBADAS: ' . '</td><td width="200">'. $rowsexp['ASIG_REPROBADAS'] . '</td></tr>';
+        echo '<tr><td width="200"> MATERIAS RETIRADAS: ' . '</td><td width="200"> '. $rowsexp['ASIG_RETIRADAS'] . '</td></tr>';       
+    }    
 }
 
 else if(trim($q)=='') {
-    echo 'POR FAVOR INTRODUCIR SU NOMBRE';
+    echo 'Por favor seleccionar el carnet';
 }
 else{
     
-    echo '<tr><td colspan="2"><B><font color=red>FICHA INEXISTENTE</font></B></td></tr>';
+    echo '<tr><td colspan="2"><B><font color=red>Ficha inexistente</font></B></td></tr>';
 }
    
         

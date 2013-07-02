@@ -35,7 +35,7 @@ class estudiante{
         $this->celular = $cel;
         $this->sexo = $sexo;
         $this->email=$emaila;
-        $this->foto = '/images/photos/' . $fotoa;
+        $this->foto = 'images/photos/' . $fotoa;
         $this->carrera=$carreraa;
         $this->cum=$cuma;
         $this->aprobadas = $aprobadasa;
