@@ -77,7 +77,7 @@
             }
         }
 
-        function ChequearUsuario($conexion,$user,$passw){
+        function ChequearUsuario($conexion){
             $query = "SELECT * FROM usuario WHERE USUARIO ='".$user."'";
             $result = mysql_query($query, $conexion);
             if ($result){
